@@ -1,0 +1,4 @@
+﻿A file containing sample text
+second line in file
+third line in file
+

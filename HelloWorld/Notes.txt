@@ -1,0 +1,281 @@
+﻿1. Introduction
+- C# vs .NET
+C# is a programming language
+.NET is a framework for building applications on Windows.
+(.NET supports many languages C#, F#, VB.NET)
+.NET has CLR and Class library
+
+- CLR (Common Language Run-Time)
+C# code is compiled to IL Code (Intermediate Language), which is converted to native code by CLR (similar to jre in Java) using JIT (just in time compilation) and executed.
+
+- Architecture of .NET applications
+App consists of classes.
+Class has data (state) and methods (behaviour).
+Namespaces are container for related classes.
+Assembly (DLL or EXE) is a container for related namespaces.
+On compilation of app, compiler builds many assembly files for the app.
+
+- First C# applications
+new project -> windows -> console application
+set name for project HelloWorld -> OK
+Solution explorer
+Properties/AssemblyInfo.cs - Identification for produced assembly.
+References/<assemblies> - Other assemblies used in the project.
+App.config - is an XML to store configuration for the application.
+Program.cs  - Here we write code.
+In a namespace - we have access to all class defined inside anywhere inside it.
+using statements - for importing classes from different namespace
+Default using imports
+System - basic utility classes and primitive types
+System.Collections.Generic - for working with list and collection
+System.Linq - Used to work with data
+System.Text - to work with text and coding.
+System.Threading.Tasks - to build multithreaded apps.
+
+2. Primitive Types
+- Variables and Constants
+Integral numbers - byte, short, int, long
+Real numbers - float (1.2f), double, decimal (1.2m)
+Character - char
+Boolean - bool
+Non-primitive - String, Array, Enum, Class
+
+- Overflowing
+byte number = 255;
+number = number + 1;
+then number becomes 0.
+avoiding by
+checked
+{
+    byte number = 255;
+    number = number + 1;
+}
+
+- Scope : Part of code where a variable is accessible.
+
+- Coding
+format string - Console.WriteLines("{0} {1}", x, y)
+
+- Type conversion
+Implicit
+byte to integer, integer to float, etc.
+Explicit (casting)
+integer to byte -> byte b = (byte) i ;
+B/w non-compatible types
+string to integer -> int i = Convert.ToInt32(s); and int i = int.Parse(s);
+Some methods of Convert :- ToByte(), ToInt16(), ToInt32(), ToInt64().
+
+- Operators
+Arithmetic
+Comparison
+Assignment -> =, +=, -=, *= & /=
+Logical -> &&, || & !
+Bitwise -> &, |
+
+- Comments
+Single line -> //
+Multi line -> /* */
+Used to describe : whys, hows, constraints
+not the whats code is doing.
+
+- Static type language : where variable type cannot be changed, i.e, integer to string etc.
+
+3. Non-primitive types
+Classes, structures, arrays, strings, enums
+Reference types and value types.
+
+- Classes
+We don't access static methods from Objects.
+We can initialize object with some variables of class as
+var obj = new Object() { val = 1 };
+
+- Structs
+Mostly similar to classes (has variables and methods)
+All primitive types are structs.
+
+- Arrays
+arrays are classes
+syntax is same as java
+int[] i = new int[3] {1,2,3};
+arrays defined are internally objects.
+
+- Strings
+strings are classes
+string formats -> string.Format("{0}", val);
+joining -> string.Join(",", numbersList)
+strings are immutable
+verbatim strings -> var s = @"C:\some\path"; no need to specify double \
+
+- Enums
+for related constants
+using custom type
+public enum <EnumName> : byte {
+attr1 = val1, attr2 = val2
+}
+casting int to enum -> (EnumName)var;
+parsing string to enum -> (EnumName)Enum.Parse(typeof(EnumName), strVar);
+
+- Reference Types and Value types
+Value Types (Structs) :
+Allocated on stack
+Memory allocation done automatically
+Immediately removed when out of scope.
+On copying a different memory with copied value is created.
+
+Reference Types (Classes) :
+We need to allocate memory (new <Class>())
+Memory allocated from heap
+Not removed immediately
+Garbage collector or CLR removes it from memory.
+On copying memory address is copied to new created variable.
+
+
+4. Control Flow
+if/else
+switch/case
+ternary -> a ? b : c;
+
+- Iteration statements
+foreach (var number in numbers) {}
+
+- Random class
+to generate random numbers
+we use Next() method.
+
+
+5. Arrays and Lists
+- Arrays
+Fixed types
+Multidimensional arrays types - Rectangular, Jagged
+Rectangular  -> new int[3, 5, ...]
+Jagged -> var arr = new int[x][ ]; arr[0] = new int[y];
+Methods of arrays
+.IndexOf - getting index
+.Clear(array, startIndex, length) - clears items from array
+.Copy(array1, array2, length) - copying a part of array to another array
+.Sort(), .Reverse()
+
+- Lists
+Dynamic types
+var numbers = new List<int>();
+or new List<int>() {1,2,3,4};
+Methods
+Add() - add object to list
+AddRange() - add list/array of objects to list
+Remove() - remove one object
+RemoveAt() - remove at index
+IndexOf() - return index of given object
+Contains() - list contains given object
+Count - return no of objects in list
+
+6. Working with dates
+- DateTime
+DateTime is struct defined in System namespace.
+DateTime obj is immutable
+attributes -> Now - current time
+Hour, Minute, Today (for date)
+Adding time using .Add methods and they returns new DateTime obj.
+Converting to string
+.ToString(<optional format>), ToLongDateString, ToShortDateString,
+ToLongTimeString, ToShortTimeString
+
+- TimeSpan
+For specifying time span.
+subtracting 2 datetime obj returns timespan
+timeSpan.Minutes returns minute component only.
+timeSpan.TotalMinutes returns include sum of minutes in hours, days etc components also.
+TimeSpan obj is immutable.
+Adding timepan using only .Add method and it returns new TimeSpan obj.
+Similary .Subtract method.
+Converting to string : ToString method
+Parsing from string : .Parse method
+
+
+7. Working with Text
+- Strings
+strings are immutable.
+Formatting - ToLower, ToUpper, Trim
+Searching - IndexOf(char), LastIndexOf(string)
+Substrings - Substring(startIndex, [optional : length])
+Replacing - Replace(oldChar, newChar), Replace(oldString, newString)
+Null checking - String.IsNullOrEmpty(str), String.IsNullOrWhiteSpace(str)
+Split - str.Split(char)
+Converting string to numbers : int.Parse(str), Convert.ToInt32(str)
+Converting numbers to string : i.ToString(), i.ToString(format)
+format  -> "C"-currency-"$1234.00", "C0"-currency-"$1234", D-Decimal,
+E-Exponential, F-fixedpoint, X-hexadecimal
+(Also take screenshot of table at 04:13 and attach it to mindmap).
+
+- StringBuilder
+Defined in System.Text
+A mutable string
+easy and fast to create/mutable string
+Not for searching like - Index, contains, startswith etc.
+String manipulation methods
+Append(), Insert(), Remove(), Replace(), Clear()
+builder[x] to access individual chars.
+
+- Procedural Programming
+A programming paradigm based on procedure calls.
+
+
+8. Working with files
+in namespace System.IO
+- File, FileInfo
+provide methods for create, copy, delete, move, opening files.
+File - static methods & security checking is done by os each time,
+FileInfo - instance methods & security checking is done once only.
+Methods -> Create, Copy, Delete, Exists, GetAttributes, Move,
+ReadAllText - reads all text in a file (only for File).
+OpenRead - reading using a filestream (only for FileInfo).
+
+- Directory, DirectoryInfo
+Directory - static methods
+DirectoryInfo - instance methods
+Methods -> CreateDirectory, Delete, Exists, GetFiles(<optional filter>), GetDirectories, Move
+GetCurrentDirectory - dir of app
+GetLogicalDrives - to get logical drives (C:, D: etc)
+
+- Path
+provide methods for file/dir path strings.
+Methdos -> GetDirectoryName, GetFileName, GetExtension,
+GetTempPath - path of current user's temp folder.
+
+9. Debugging Applications
+Breakpoints, Watches, Call stacks, Locals and Auto window, 
+Put 1 or more breakpoints
+Run app in debug mode.
+Continue execution.
+Inspect variables using watches window.
+
+Shortcuts -
+F9 - setting breakpoint on line
+Ctrl + F5 - run normal
+F5 - run in debug mode
+Shft + F5 - stop debugger
+F10 - step over - execute one line at a time
+F11 - step in
+Shft + F11 - step out
+
+Watch window 
+Debug > Windows > Watch > Watch 1
+
+Removing side effects
+side effect - unexpected change in var/state.
+
+Defensive programming
+preventing application in going in wrong state.
+checking of user inputs' first before processing further.
+Cover all possible edge cases.
+
+Call stack window
+Debug > windows > call stacks
+Lists functions called till the location of last executed line.
+
+Locals and Auto window
+Autos - watch window with automatic list of vars
+Locals - watch windwo with local vars
+-------------------------------
+Status : 
+Section 9 : Debugging Applications : Completed
+
